@@ -10,7 +10,8 @@ public class NullPatternComponent implements PatternComponent {
         // Private so you have to use the only INSTANCE
     }
 
-    public void buildRegex(StringBuilder builder, GroupNamespace groups) {
+    @Override
+    public void buildRegex(final StringBuilder builder, final GroupNamespace groups) {
         // Do nothing
     }
 }

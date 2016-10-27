@@ -5,17 +5,18 @@ import org.hamcrest.text.pattern.internal.ast.Literal;
 import org.hamcrest.text.pattern.internal.naming.GroupNamespace;
 
 public class Field implements PatternComponent {
-    private String name;
-    private PatternComponent sequence;
+    private final String name;
+    private final PatternComponent sequence;
 
-    public Field(String name, PatternComponent pattern) {
+    public Field(final String name, final PatternComponent pattern) {
         this.name = name;
         // TODO: clean this up and make the delimiter changeable
-        Object[] args = new Object[] { "\"", new CaptureGroup(name, pattern), new Literal("\"") };
-        this.sequence = Patterns.sequence(args);
+        final Object[] args = new Object[] { "\"", new CaptureGroup(name, pattern), new Literal("\"") };
+        sequence = Patterns.sequence(args);
     }
 
-    public void buildRegex(StringBuilder builder, GroupNamespace groups) {
+    @Override
+    public void buildRegex(final StringBuilder builder, final GroupNamespace groups) {
         sequence.buildRegex(builder, groups);
     }
 

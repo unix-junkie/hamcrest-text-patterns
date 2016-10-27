@@ -2,12 +2,13 @@ package org.hamcrest.text.pattern.internal.ast;
 
 import org.hamcrest.text.pattern.PatternComponent;
 
-public class Optional extends PatternModifier implements PatternComponent {
-    public Optional(PatternComponent pattern) {
+public class Optional extends PatternModifier {
+    public Optional(final PatternComponent pattern) {
         super(pattern);
     }
 
-    protected void appendModifier(StringBuilder builder) {
+    @Override
+    protected void appendModifier(final StringBuilder builder) {
         builder.append("?");
     }
 }

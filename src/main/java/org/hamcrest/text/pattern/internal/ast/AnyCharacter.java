@@ -9,7 +9,8 @@ public class AnyCharacter implements PatternComponent {
     private AnyCharacter() {
     }
 
-    public void buildRegex(StringBuilder builder, GroupNamespace groups) {
+    @Override
+    public void buildRegex(final StringBuilder builder, final GroupNamespace groups) {
         builder.append(".");
     }
 }

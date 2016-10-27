@@ -3,11 +3,12 @@ package org.hamcrest.text.pattern.internal.ast;
 import org.hamcrest.text.pattern.PatternComponent;
 
 public class ZeroOrMore extends PatternModifier {
-    public ZeroOrMore(PatternComponent pattern) {
+    public ZeroOrMore(final PatternComponent pattern) {
         super(pattern);
     }
 
-    protected void appendModifier(StringBuilder builder) {
+    @Override
+    protected void appendModifier(final StringBuilder builder) {
         builder.append("*");
     }
 }

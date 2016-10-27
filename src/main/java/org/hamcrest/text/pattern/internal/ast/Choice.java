@@ -6,14 +6,15 @@ import org.hamcrest.text.pattern.internal.naming.GroupNamespace;
 public class Choice implements PatternComponent {
     private final PatternComponent[] alternatives;
 
-    public Choice(PatternComponent[] alternatives) {
+    public Choice(final PatternComponent[] alternatives) {
         this.alternatives = alternatives.clone();
     }
 
-    public void buildRegex(StringBuilder builder, GroupNamespace groups) {
+    @Override
+    public void buildRegex(final StringBuilder builder, final GroupNamespace groups) {
         builder.append("(?:");
         boolean needsSeparator = false;
-        for (PatternComponent alternative : alternatives) {
+        for (final PatternComponent alternative : alternatives) {
             if (needsSeparator) {
                 builder.append("|");
             } else {

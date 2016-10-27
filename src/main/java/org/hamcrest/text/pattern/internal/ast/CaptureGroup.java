@@ -4,16 +4,17 @@ import org.hamcrest.text.pattern.PatternComponent;
 import org.hamcrest.text.pattern.internal.naming.GroupNamespace;
 
 public class CaptureGroup implements PatternComponent {
-    private String name;
-    private PatternComponent pattern;
+    private final String name;
+    private final PatternComponent pattern;
 
-    public CaptureGroup(String name, PatternComponent pattern) {
+    public CaptureGroup(final String name, final PatternComponent pattern) {
         this.name = name;
         this.pattern = pattern;
     }
 
-    public void buildRegex(StringBuilder builder, GroupNamespace groups) {
-        GroupNamespace subgroups = groups.create(name);
+    @Override
+    public void buildRegex(final StringBuilder builder, final GroupNamespace groups) {
+        final GroupNamespace subgroups = groups.create(name);
         builder.append("(");
         pattern.buildRegex(builder, subgroups);
         builder.append(")");

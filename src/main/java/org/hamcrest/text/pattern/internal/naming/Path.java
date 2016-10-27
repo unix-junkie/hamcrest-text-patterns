@@ -6,21 +6,21 @@ public class Path {
     private final String[] components;
     private final int offset;
 
-    public Path(String... components) {
+    public Path(final String... components) {
         this.components = components;
-        this.offset = 0;
+        offset = 0;
     }
 
-    private Path(String[] components, int offset) {
+    private Path(final String[] components, final int offset) {
         this.components = components;
         this.offset = offset;
     }
 
     public int size() {
-        return this.components.length - offset;
+        return components.length - offset;
     }
 
-    public String component(int i) {
+    public String component(final int i) {
         return components[offset + i];
     }
 
@@ -29,7 +29,7 @@ public class Path {
     }
 
     public Path tail() {
-        return new Path(this.components, offset + 1);
+        return new Path(components, offset + 1);
     }
 
     @Override
@@ -38,13 +38,16 @@ public class Path {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
+    public boolean equals(final Object obj) {
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
 
         final Path other = (Path) obj;
 
@@ -52,7 +55,7 @@ public class Path {
             return false;
         }
 
-        for (int i = 0; i < this.size(); i++) {
+        for (int i = 0; i < size(); i++) {
             if (!component(i).equals(other.component(i))) {
                 return false;
             }
@@ -63,18 +66,19 @@ public class Path {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
 
-        for (String component : components) {
-            if (builder.length() > 0)
+        for (final String component : components) {
+            if (builder.length() > 0) {
                 builder.append(".");
+            }
             builder.append(component);
         }
 
         return builder.toString();
     }
 
-    public static Path parse(String pathAsString) {
+    public static Path parse(final String pathAsString) {
         return new Path(pathAsString.split("\\."));
     }
 }

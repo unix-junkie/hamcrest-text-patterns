@@ -13,16 +13,18 @@ public class ListOf implements SeparablePatternComponent {
     private final PatternComponent element;
     private final PatternComponent separator;
 
-    public ListOf(PatternComponent element, PatternComponent separator) {
+    public ListOf(final PatternComponent element, final PatternComponent separator) {
         this.element = element;
         this.separator = separator;
     }
 
-    public void buildRegex(StringBuilder builder, GroupNamespace groups) {
+    @Override
+    public void buildRegex(final StringBuilder builder, final GroupNamespace groups) {
         optional(sequence(element, zeroOrMore(sequence(separator, element)))).buildRegex(builder, groups);
     }
 
-    public PatternComponent separatedBy(Object separator) {
+    @Override
+    public PatternComponent separatedBy(final Object separator) {
         return new ListOf(element, toPattern(separator));
     }
 }

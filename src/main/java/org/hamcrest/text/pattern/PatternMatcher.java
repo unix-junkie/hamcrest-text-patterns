@@ -9,53 +9,56 @@ import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.text.pattern.internal.naming.GroupNamespace;
 
 public class PatternMatcher extends TypeSafeMatcher<String> implements PatternComponent {
-    private GroupNamespace groups = new GroupNamespace();
-    private PatternComponent root;
-    private Pattern pattern;
+    private final GroupNamespace groups = new GroupNamespace();
+    private final PatternComponent root;
+    private final Pattern pattern;
 
-    public PatternMatcher(PatternComponent root) {
+    public PatternMatcher(final PatternComponent root) {
         this.root = root;
-        this.pattern = compile(root, groups);
+        pattern = compile(root, groups);
     }
 
     @Factory
-    public static PatternMatcher matchesPattern(PatternComponent pattern) {
+    public static PatternMatcher matchesPattern(final PatternComponent pattern) {
         return new PatternMatcher(pattern);
     }
 
     @Factory
-    public static PatternMatcher matchesPattern(PatternMatcher pattern) {
+    public static PatternMatcher matchesPattern(final PatternMatcher pattern) {
         return pattern;
     }
 
+    @Override
     public String toString() {
         return pattern.toString();
     }
 
-    public void describeTo(Description description) {
+    @Override
+    public void describeTo(final Description description) {
         description.appendText("a string matching ");
-        description.appendValue(this.toString());
+        description.appendValue(toString());
     }
 
-    public boolean matchesSafely(String s) {
+    @Override
+    public boolean matchesSafely(final String s) {
         return pattern.matcher(s).matches();
     }
 
-    public Parse parse(String input) throws PatternMatchException {
-        Matcher matcher = pattern.matcher(input);
+    public Parse parse(final String input) throws PatternMatchException {
+        final Matcher matcher = pattern.matcher(input);
         if (matcher.matches()) {
             return new Parse(groups, matcher);
-        } else {
-            throw new PatternMatchException("did not match input: " + input);
         }
+        throw new PatternMatchException("did not match input: " + input);
     }
 
-    public void buildRegex(StringBuilder builder, GroupNamespace groups) {
+    @Override
+    public void buildRegex(final StringBuilder builder, final GroupNamespace groups) {
         root.buildRegex(builder, groups);
     }
 
-    private static Pattern compile(PatternComponent root, GroupNamespace groups) {
-        StringBuilder builder = new StringBuilder();
+    private static Pattern compile(final PatternComponent root, final GroupNamespace groups) {
+        final StringBuilder builder = new StringBuilder();
         root.buildRegex(builder, groups);
         return Pattern.compile(builder.toString());
     }

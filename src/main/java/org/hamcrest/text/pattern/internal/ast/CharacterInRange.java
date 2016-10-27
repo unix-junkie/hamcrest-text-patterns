@@ -6,11 +6,12 @@ import org.hamcrest.text.pattern.internal.naming.GroupNamespace;
 public class CharacterInRange implements PatternComponent {
     private final String range;
 
-    public CharacterInRange(String range) {
+    public CharacterInRange(final String range) {
         this.range = range;
     }
 
-    public void buildRegex(StringBuilder builder, GroupNamespace groups) {
+    @Override
+    public void buildRegex(final StringBuilder builder, final GroupNamespace groups) {
         builder.append("[").append(range).append("]");
     }
 }

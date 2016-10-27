@@ -9,10 +9,10 @@ public class GroupNamespace {
     private final IndexSequence nextGroupIndex;
     private final int groupIndex;
 
-    private GroupNamespace(GroupNamespace parent, IndexSequence nextGroupIndex) {
+    private GroupNamespace(final GroupNamespace parent, final IndexSequence nextGroupIndex) {
         this.parent = parent;
         this.nextGroupIndex = nextGroupIndex;
-        this.groupIndex = nextGroupIndex.next();
+        groupIndex = nextGroupIndex.next();
     }
 
     public GroupNamespace() {
@@ -23,25 +23,25 @@ public class GroupNamespace {
         return groupIndex;
     }
 
-    public GroupNamespace create(String name) {
+    public GroupNamespace create(final String name) {
         if (bindings.containsKey(name)) {
             throw new IllegalArgumentException("duplicate name '" + name + "'");
         }
 
-        GroupNamespace child = new GroupNamespace(this, nextGroupIndex);
+        final GroupNamespace child = new GroupNamespace(this, nextGroupIndex);
         bindings.put(name, child);
         return child;
     }
 
-    public int resolve(String pathAsString) {
+    public int resolve(final String pathAsString) {
         return resolve(Path.parse(pathAsString));
     }
 
-    public int resolve(Path path) {
+    public int resolve(final Path path) {
         return environmentContaining(path.head()).resolveInternally(path.tail());
     }
 
-    public int resolveInternally(Path path) {
+    public int resolveInternally(final Path path) {
         if (path.size() == 0) {
             return groupIndex;
         } else if (bindings.containsKey(path.head())) {
@@ -51,7 +51,7 @@ public class GroupNamespace {
         }
     }
 
-    private GroupNamespace environmentContaining(String name) {
+    private GroupNamespace environmentContaining(final String name) {
         if (bindings.containsKey(name)) {
             return bindings.get(name);
         } else if (parent != null) {

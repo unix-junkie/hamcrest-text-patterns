@@ -6,11 +6,12 @@ import org.hamcrest.text.pattern.internal.naming.GroupNamespace;
 public class CharacterNotInUnicodeCategory implements PatternComponent {
     private final String categoryName;
 
-    public CharacterNotInUnicodeCategory(String categoryName) {
+    public CharacterNotInUnicodeCategory(final String categoryName) {
         this.categoryName = categoryName;
     }
 
-    public void buildRegex(StringBuilder builder, GroupNamespace groups) {
+    @Override
+    public void buildRegex(final StringBuilder builder, final GroupNamespace groups) {
         builder.append("\\P{Is").append(categoryName).append("}");
     }
 }

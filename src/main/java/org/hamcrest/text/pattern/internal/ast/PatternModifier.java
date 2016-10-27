@@ -4,13 +4,14 @@ import org.hamcrest.text.pattern.PatternComponent;
 import org.hamcrest.text.pattern.internal.naming.GroupNamespace;
 
 public abstract class PatternModifier implements PatternComponent {
-    private PatternComponent pattern;
+    private final PatternComponent pattern;
 
-    public PatternModifier(PatternComponent pattern) {
+    public PatternModifier(final PatternComponent pattern) {
         this.pattern = pattern;
     }
 
-    public void buildRegex(StringBuilder builder, GroupNamespace groups) {
+    @Override
+    public void buildRegex(final StringBuilder builder, final GroupNamespace groups) {
         builder.append("(?:");
         pattern.buildRegex(builder, groups);
         builder.append(")");

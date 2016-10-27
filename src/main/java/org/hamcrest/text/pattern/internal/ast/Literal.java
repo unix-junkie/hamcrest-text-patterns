@@ -6,13 +6,14 @@ import org.hamcrest.text.pattern.PatternComponent;
 import org.hamcrest.text.pattern.internal.naming.GroupNamespace;
 
 public class Literal implements PatternComponent {
-    private String literal;
+    private final String literal;
 
-    public Literal(String literal) {
+    public Literal(final String literal) {
         this.literal = literal;
     }
 
-    public void buildRegex(StringBuilder builder, GroupNamespace groups) {
+    @Override
+    public void buildRegex(final StringBuilder builder, final GroupNamespace groups) {
         builder.append(Pattern.quote(literal));
     }
 }

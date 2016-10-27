@@ -4,16 +4,17 @@ import org.hamcrest.text.pattern.PatternComponent;
 import org.hamcrest.text.pattern.internal.naming.GroupNamespace;
 
 public class Exactly implements PatternComponent {
-    private int requiredNumber;
+    private final int requiredNumber;
 
-    private PatternComponent repeatedPattern;
+    private final PatternComponent repeatedPattern;
 
-    public Exactly(int requiredNumber, PatternComponent repeatedPattern) {
+    public Exactly(final int requiredNumber, final PatternComponent repeatedPattern) {
         this.requiredNumber = requiredNumber;
         this.repeatedPattern = repeatedPattern;
     }
 
-    public void buildRegex(StringBuilder builder, GroupNamespace groups) {
+    @Override
+    public void buildRegex(final StringBuilder builder, final GroupNamespace groups) {
         repeatedPattern.buildRegex(builder, groups);
         builder.append("{");
         builder.append(requiredNumber);
