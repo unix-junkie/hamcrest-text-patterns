@@ -90,7 +90,7 @@ public abstract class Patterns {
     }
 
     public static PatternComponent separatedBy(final Object separator, final Object... elements) {
-        final List<Object> separated = new ArrayList<Object>(elements.length*2 - 1);
+        final List<Object> separated = new ArrayList<>(elements.length*2 - 1);
 
         separated.add(elements[0]);
         for (int i = 1; i < elements.length; i++) {

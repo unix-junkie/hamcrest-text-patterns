@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class GroupNamespace {
     private final GroupNamespace parent;
-    private final Map<String, GroupNamespace> bindings = new HashMap<String, GroupNamespace>();
+    private final Map<String, GroupNamespace> bindings = new HashMap<>();
     private final IndexSequence nextGroupIndex;
     private final int groupIndex;
 
