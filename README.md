@@ -1,5 +1,8 @@
 hamcrest-text-patterns
 ======================
+[![Build Status](https://api.travis-ci.org/unix-junkie/hamcrest-text-patterns.png?branch=master)](https://travis-ci.org/unix-junkie/hamcrest-text-patterns)
+[![codecov.io](http://codecov.io/github/unix-junkie/hamcrest-text-patterns/coverage.svg?branch=master)](http://codecov.io/github/unix-junkie/hamcrest-text-patterns?branch=master)
+
 A library for writing readable, composable regular expression matchers that integrates cleanly with [Hamcrest](http://code.google.com/p/hamcrest/).
 
 Features
